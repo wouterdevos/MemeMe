@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		104CFD0D1BAD733E00275213 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104CFD0C1BAD733E00275213 /* Meme.swift */; };
 		10668CF41BA88CD200AC9EBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10668CF31BA88CD200AC9EBB /* AppDelegate.swift */; };
 		10668CF71BA88CD200AC9EBB /* MemeMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10668CF51BA88CD200AC9EBB /* MemeMe.xcdatamodeld */; };
 		10668CF91BA88CD200AC9EBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10668CF81BA88CD200AC9EBB /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		104CFD0C1BAD733E00275213 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		10668CEE1BA88CD200AC9EBB /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10668CF21BA88CD200AC9EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10668CF31BA88CD200AC9EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				10668CFF1BA88CD200AC9EBB /* LaunchScreen.xib */,
 				10668CF51BA88CD200AC9EBB /* MemeMe.xcdatamodeld */,
 				10668CF11BA88CD200AC9EBB /* Supporting Files */,
+				104CFD0C1BAD733E00275213 /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10668CF91BA88CD200AC9EBB /* ViewController.swift in Sources */,
+				104CFD0D1BAD733E00275213 /* Meme.swift in Sources */,
 				10668CF41BA88CD200AC9EBB /* AppDelegate.swift in Sources */,
 				10668CF71BA88CD200AC9EBB /* MemeMe.xcdatamodeld in Sources */,
 			);
@@ -413,6 +417,7 @@
 				10668D121BA88CD200AC9EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10668D131BA88CD200AC9EBB /* Build configuration list for PBXNativeTarget "MemeMeTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				10668D151BA88CD200AC9EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
