@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolbar: UIToolbar!
     
     @IBOutlet weak var topTextField: UITextField!
@@ -32,16 +33,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         shareButton.enabled = false
         
+        // Set the default text.
         topTextField.text = topText
         bottomTextField.text = bottomText
-        topTextField.textAlignment = .Center
-        bottomTextField.textAlignment = .Center
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        topTextField.tag = 0
-        bottomTextField.tag = 1
+        
+        // Set the default text attributes.
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        // Center the text.
+        topTextField.textAlignment = .Center
+        bottomTextField.textAlignment = .Center
+        
+        topTextField.delegate = self
+        bottomTextField.delegate = self
+        
+        topTextField.tag = 0
+        bottomTextField.tag = 1
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,6 +73,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.text = topText
         bottomTextField.text = bottomText
         imageView.image = nil
+        shareButton.enabled = false
     }
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
@@ -86,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.contentMode = .ScaleAspectFill
+            imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
             shareButton.enabled = true
         }
@@ -159,8 +168,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func generateMemedImage() -> UIImage {
         
         // Hide the navigation bar and toolbar
-        navigationController?.navigationBarHidden = true
-        navigationController?.setToolbarHidden(true, animated: false)
+        navigationBar.hidden = true
+        toolbar.hidden = true
         
         // Render the screen view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -169,8 +178,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
         
         // Show the navigation bar and toolbar
-        navigationController?.navigationBarHidden = false
-        navigationController?.setToolbarHidden(false, animated: false)
+        navigationBar.hidden = false
+        toolbar.hidden = false
         
         return memedImage
     }
