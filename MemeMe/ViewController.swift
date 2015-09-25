@@ -64,8 +64,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func shareMeme(sender : AnyObject) {
-        let meme = saveMemedImage()
-        let activityViewController = UIActivityViewController(activityItems: [meme.targetImage], applicationActivities: nil)
+        let memedImage = generateMemedImage()
+        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = {
+            (activity : String!, completed : Bool, items : [AnyObject]!, error : NSError!) -> Void in
+            if completed {
+                self.saveMeme()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
@@ -158,7 +165,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    func saveMemedImage() -> Meme {
+    func saveMeme() -> Meme {
         let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, sourceImage: memedImage, targetImage: memedImage)
         
