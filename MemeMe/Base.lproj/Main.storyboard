@@ -5,11 +5,17 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Impact.ttf">
+            <string>Impact</string>
+            <string>Impact</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -56,13 +62,19 @@
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="center" restorationIdentifier="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-Te-cbS">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="507" width="368" height="29"/>
+                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="center" restorationIdentifier="top" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8NS-NU-RDh">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="84" width="368" height="29"/>
+                                </variation>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -99,12 +111,8 @@
                                 <exclude reference="8NS-NU-RDh"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ukt-9g-amo"/>
-                                <exclude reference="eeF-fP-q8M"/>
-                                <exclude reference="pnv-pf-j1k"/>
-                                <exclude reference="BXq-mL-adB"/>
-                                <exclude reference="NbV-Mt-NK5"/>
-                                <exclude reference="Njx-rh-pmj"/>
+                                <exclude reference="2dX-zL-DXe"/>
+                                <exclude reference="7IK-1z-igW"/>
                                 <exclude reference="D1g-wD-rcT"/>
                                 <exclude reference="RUs-Ba-tcr"/>
                                 <exclude reference="dFJ-G6-Nso"/>
@@ -112,11 +120,15 @@
                                 <exclude reference="UwI-uj-a3W"/>
                                 <exclude reference="ZQ6-h8-0GE"/>
                                 <exclude reference="ins-gJ-VOS"/>
+                                <exclude reference="Ukt-9g-amo"/>
+                                <exclude reference="eeF-fP-q8M"/>
+                                <exclude reference="pnv-pf-j1k"/>
                                 <exclude reference="PGL-fT-4hV"/>
                                 <exclude reference="WBT-cb-KbD"/>
                                 <exclude reference="hWn-HS-v8a"/>
-                                <exclude reference="2dX-zL-DXe"/>
-                                <exclude reference="7IK-1z-igW"/>
+                                <exclude reference="BXq-mL-adB"/>
+                                <exclude reference="NbV-Mt-NK5"/>
+                                <exclude reference="Njx-rh-pmj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -128,12 +140,8 @@
                                 <include reference="8NS-NU-RDh"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ukt-9g-amo"/>
-                                <include reference="eeF-fP-q8M"/>
-                                <include reference="pnv-pf-j1k"/>
-                                <include reference="BXq-mL-adB"/>
-                                <include reference="NbV-Mt-NK5"/>
-                                <include reference="Njx-rh-pmj"/>
+                                <include reference="2dX-zL-DXe"/>
+                                <include reference="7IK-1z-igW"/>
                                 <include reference="D1g-wD-rcT"/>
                                 <include reference="RUs-Ba-tcr"/>
                                 <include reference="dFJ-G6-Nso"/>
@@ -141,11 +149,15 @@
                                 <include reference="UwI-uj-a3W"/>
                                 <include reference="ZQ6-h8-0GE"/>
                                 <include reference="ins-gJ-VOS"/>
+                                <include reference="Ukt-9g-amo"/>
+                                <include reference="eeF-fP-q8M"/>
+                                <include reference="pnv-pf-j1k"/>
                                 <include reference="PGL-fT-4hV"/>
                                 <include reference="WBT-cb-KbD"/>
                                 <include reference="hWn-HS-v8a"/>
-                                <include reference="2dX-zL-DXe"/>
-                                <include reference="7IK-1z-igW"/>
+                                <include reference="BXq-mL-adB"/>
+                                <include reference="NbV-Mt-NK5"/>
+                                <include reference="Njx-rh-pmj"/>
                             </mask>
                         </variation>
                     </view>

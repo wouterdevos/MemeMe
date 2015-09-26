@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     let topText = "TOP"
     let bottomText = "BOTTOM"
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSFontAttributeName : UIFont(name: "Impact", size: 40)!,
         NSStrokeWidthAttributeName : -3]
     
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -62,10 +62,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 
     @IBAction func shareMeme(sender : AnyObject) {
+        // Generate the memed image.
         let memedImage = generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        
+        // Save the meme after the activity view controller has completed.
         activityViewController.completionWithItemsHandler = {
             (activity : String!, completed : Bool, items : [AnyObject]!, error : NSError!) -> Void in
             if completed {
@@ -77,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cancelMeme(sender : AnyObject) {
+        // Reset the meme editor.
         topTextField.text = topText
         bottomTextField.text = bottomText
         imageView.image = nil
@@ -94,6 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func getImagePickerController(sourceType : UIImagePickerControllerSourceType) -> UIImagePickerController {
+        // Get an image picker controller with the provided source type.
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
@@ -101,6 +110,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        // If and image is picked set the image view and enable the share button.
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
@@ -114,6 +124,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        // Clear the text field of the default text.
         if let text = textField.text {
             if text == topText || text == bottomText {
                 textField.text = ""
@@ -122,19 +133,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        if let text = textField.text {
-            if text == "" {
-                textField.text = textField.tag == 0 ? topText : bottomText
-            }
-        }
+        // Add the default text if the text field is blank.
+        setDefaultText(textField)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField.text == "" {
-            textField.text = textField.tag == 0 ? topText : bottomText
-        }
+        // Add the default text if the text field is blank.
+        setDefaultText(textField)
         textField.resignFirstResponder()
         return false
+    }
+    
+    func setDefaultText(textField: UITextField) {
+        if let text = textField.text {
+            if text == "" {
+                textField.text = topTextField.editing ? topText : bottomText
+            }
+        }
     }
     
     func getKeyboardHeight(notification : NSNotification) -> CGFloat {
@@ -144,13 +159,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification : NSNotification) {
-        if !topTextField.editing {
+        // Shift the view up when the bottom text field starts editing.
+        if bottomTextField.editing {
             self.view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification : NSNotification) {
-        if !topTextField.editing {
+        // Shift the view down when the bottom text field ends editing.
+        if bottomTextField.editing {
             self.view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
@@ -166,25 +183,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func saveMeme() -> Meme {
+        // Save a Meme object.
         let memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, sourceImage: memedImage, targetImage: memedImage)
+        let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: imageView.image!, memedImage: memedImage)
         
         return meme
     }
     
     func generateMemedImage() -> UIImage {
         
-        // Hide the navigation bar and toolbar
+        // Hide the navigation bar and toolbar.
         navigationBar.hidden = true
         toolbar.hidden = true
         
-        // Render the screen view to an image
+        // Render the screen view to an image.
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // Show the navigation bar and toolbar
+        // Show the navigation bar and toolbar.
         navigationBar.hidden = false
         toolbar.hidden = false
         

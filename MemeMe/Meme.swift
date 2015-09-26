@@ -12,13 +12,13 @@ import UIKit
 class Meme: NSObject {
     var topText : String!
     var bottomText : String!
-    var sourceImage : UIImage!
-    var targetImage :UIImage!
+    var image : UIImage!
+    var memedImage :UIImage!
     
-    init(topText : String, bottomText : String, sourceImage : UIImage, targetImage : UIImage) {
+    init(topText : String, bottomText : String, image : UIImage, memedImage : UIImage) {
         self.topText = topText
         self.bottomText = bottomText
-        self.sourceImage = sourceImage
-        self.targetImage = sourceImage
+        self.image = image
+        self.memedImage = memedImage
     }
 }
