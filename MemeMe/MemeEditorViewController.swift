@@ -33,23 +33,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         shareButton.enabled = false
         
-        // Set the default text.
-        topTextField.text = topText
-        bottomTextField.text = bottomText
-        
-        // Set the default text attributes.
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        // Center the text.
-        topTextField.textAlignment = .Center
-        bottomTextField.textAlignment = .Center
-        
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
-        topTextField.tag = 0
-        bottomTextField.tag = 1
+        initTextField(topTextField, text: topText)
+        initTextField(bottomTextField, text: bottomText)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -80,7 +65,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     @IBAction func cancelMeme(sender : AnyObject) {
@@ -93,12 +78,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
         let imagePickerController = getImagePickerController(.PhotoLibrary)
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func pickImageFromCamera(sender: AnyObject) {
         let imagePickerController = getImagePickerController(.Camera)
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func initTextField(textField: UITextField, text : String) {
+        // Set the default text.
+        textField.text = text
+        // Set the default text attributes.
+        textField.defaultTextAttributes = memeTextAttributes
+        // Center the text.
+        textField.textAlignment = .Center
+        textField.delegate = self
     }
     
     func getImagePickerController(sourceType : UIImagePickerControllerSourceType) -> UIImagePickerController {
@@ -161,14 +156,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func keyboardWillShow(notification : NSNotification) {
         // Shift the view up when the bottom text field starts editing.
         if bottomTextField.editing {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification : NSNotification) {
         // Shift the view down when the bottom text field ends editing.
         if bottomTextField.editing {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y = 0
         }
     }
     
@@ -197,8 +192,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         toolbar.hidden = true
         
         // Render the screen view to an image.
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
