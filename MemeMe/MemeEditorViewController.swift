@@ -74,6 +74,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextField.text = bottomText
         imageView.image = nil
         shareButton.enabled = false
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
@@ -182,6 +184,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: imageView.image!, memedImage: memedImage)
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.memes.append(meme)
         return meme
     }
     
