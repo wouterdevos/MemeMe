@@ -59,7 +59,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Save the meme after the activity view controller has completed.
         activityViewController.completionWithItemsHandler = {
-            (activity : String!, completed : Bool, items : [AnyObject]!, error : NSError!) -> Void in
+            (activity : String?, completed : Bool, items : [AnyObject]?, error : NSError?) -> Void in
             if completed {
                 self.saveMeme()
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -106,7 +106,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return imagePickerController
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // If and image is picked set the image view and enable the share button.
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
@@ -182,7 +182,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func saveMeme() -> Meme {
         // Save a Meme object.
         let memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: imageView.image!, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image!, memedImage: memedImage)
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.memes.append(meme)
